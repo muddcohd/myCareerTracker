@@ -1,0 +1,72 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
+:root {
+  --primary: #7dce94;
+  --error: #e7195a;
+}
+
+body {
+  margin: 0;
+  background: #a9ba9d;
+  font-family: 'Concert One', cursive;
+}
+
+header {
+  background: whitesmoke;
+}
+
+header .container {
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header a {
+  color: #78866b;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
+.pages {
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
+}
+.job-details {
+  background: whitesmoke;
+  color: #e7195a;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.job-details h4 {
+  margin: 0 0 10px 0;
+  color: #78866b;
+  font-size: 1.2em;
+}
+
+.job-details p {
+  color: black;
+  font-size: 1em;
+  margin: 0;
+}
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}

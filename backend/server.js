@@ -2,10 +2,18 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
-
+const cors = require('cors');
 const jobRoutes = require('./routes/jobs');
 
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+);
+
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
