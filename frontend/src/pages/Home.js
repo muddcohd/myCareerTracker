@@ -1,22 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useJobsContext } from '../hooks/useJobsContext';
 
+//components
 import JobDetails from '../components/JobDetails';
 import JobForm from '../components/JobForm';
 
 const Home = () => {
-  const [jobs, setJobs] = useState(null);
+  const { jobs, dispatch } = useJobsContext();
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const response = await fetch('http://localhost:4500/api/jobs');
-      const jobsJson = await response.json();
+      const response = await fetch('/api/jobs/');
+      const json = await response.json();
 
       if (response.ok) {
-        setJobs(jobsJson);
+        dispatch({ type: 'SET_JOBS', payload: json });
       }
     };
     fetchJobs();
   }, []);
+
   return (
     <div className='home'>
       <div className='jobs'>

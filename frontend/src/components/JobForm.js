@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { useJobsContext } from '../hooks/useJobsContext';
 
 const JobForm = () => {
+  const { dispatch } = useJobsContext();
   const [title, setTitle] = useState('');
   const [company, setCompany] = useState('');
   const [salary, setSalary] = useState('');
   const [location, setLocation] = useState('');
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +27,7 @@ const JobForm = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     }
     if (response.ok) {
       setTitle('');
@@ -31,7 +35,9 @@ const JobForm = () => {
       setSalary('');
       setLocation('');
       setError(null);
+      setEmptyFields([]);
       console.log('new workout created', json);
+      dispatch({ type: 'CREATE_JOB', payload: json });
     }
   };
   return (
@@ -42,12 +48,14 @@ const JobForm = () => {
         type='text'
         onChange={(e) => setTitle(e.target.value)}
         value={title}
+        className={emptyFields.includes('title') ? 'error' : ''}
       />
       <label>Company:</label>
       <input
         type='text'
         onChange={(e) => setCompany(e.target.value)}
         value={company}
+        className={emptyFields.includes('company') ? 'error' : ''}
       />
       <label>Salary:</label>
       <input
@@ -60,6 +68,7 @@ const JobForm = () => {
         type='text'
         onChange={(e) => setLocation(e.target.value)}
         value={location}
+        className={emptyFields.includes('location') ? 'error' : ''}
       />
       <button>Add Job</button>
       {error && <div className='error'>{error}</div>}

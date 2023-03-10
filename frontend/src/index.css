@@ -62,6 +62,13 @@ header a {
   margin: 0;
 }
 
+.job-details span {
+  color: #333;
+  background-color: #e7195a;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 div.error {
   padding: 10px;
   background: #ffefef;
@@ -69,4 +76,8 @@ div.error {
   color: var(--error);
   border-radius: 4px;
   margin: 20px 0;
+}
+
+input.error {
+  border: 1px solid red;
 }

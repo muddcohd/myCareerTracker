@@ -34,6 +34,24 @@ const getJob = asyncHandler(async (req, res) => {
 const createJob = asyncHandler(async (req, res) => {
   const { title, company, location, salary } = req.body;
 
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push('title');
+  }
+  if (!company) {
+    emptyFields.push('company');
+  }
+  if (!location) {
+    emptyFields.push('location');
+  }
+
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: 'Please fill in all fields', emptyFields });
+  }
+
   const job = await Job.create({ title, company, salary, location });
 
   res.status(200).json(job);
