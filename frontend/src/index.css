@@ -1,5 +1,5 @@
 /* google font */
-@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
 
 :root {
   --primary: #7dce94;
@@ -8,12 +8,12 @@
 
 body {
   margin: 0;
-  background: #a9ba9d;
-  font-family: 'Concert One', cursive;
+  background: #ddd0c8;
+  font-family: 'Tilt Warp', cursive;
 }
 
 header {
-  background: whitesmoke;
+  background: #ddd0c8;
 }
 
 header .container {
@@ -25,9 +25,9 @@ header .container {
 }
 
 header a {
-  color: #78866b;
+  color: #323232;
   text-decoration: none;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .pages {
@@ -41,8 +41,8 @@ header a {
   gap: 100px;
 }
 .job-details {
-  background: whitesmoke;
-  color: #e7195a;
+  background: #323232;
+  color: #ddd0c8;
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
@@ -52,19 +52,19 @@ header a {
 
 .job-details h4 {
   margin: 0 0 10px 0;
-  color: #78866b;
+  color: #ddd0c8;
   font-size: 1.2em;
 }
 
 .job-details p {
-  color: black;
+  color: #ddd0c8;
   font-size: 1em;
   margin: 0;
 }
 
 .job-details span {
-  color: #333;
-  background-color: #e7195a;
+  color: #323232;
+  background-color: #ddd0c8;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -80,4 +80,49 @@ div.error {
 
 input.error {
   border: 1px solid red;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 15px;
+}
+
+nav button {
+  background-color: #323232;
+}
+
+form.login,
+form.signup {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: whitesmoke;
+  border-radius: 10px;
+}
+
+.create {
+  padding: 20px;
+  margin: 10px auto;
+}
+
+input {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+}
+
+form button {
+  background-color: #323232;
+  color: #ddd0c8;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Tilt Warp';
 }

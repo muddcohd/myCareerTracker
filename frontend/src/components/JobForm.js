@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useJobsContext } from '../hooks/useJobsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const JobForm = () => {
   const { dispatch } = useJobsContext();
+  const { user } = useAuthContext();
   const [title, setTitle] = useState('');
   const [company, setCompany] = useState('');
   const [salary, setSalary] = useState('');
@@ -13,13 +15,20 @@ const JobForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      setError('You must be logged in');
+      return;
+    }
+
     const job = { title, company, salary, location };
 
-    const response = await fetch('http://localhost:4500/api/jobs', {
+    const response = await fetch('/api/jobs', {
       method: 'POST',
       body: JSON.stringify(job),
       headers: {
         'Content-Type': 'application/json',
+        //prettier-ignore
+        Authorization: `Bearer ${user.token}`,
       },
     });
 
@@ -41,7 +50,7 @@ const JobForm = () => {
     }
   };
   return (
-    <form className='form' onSubmit={handleSubmit}>
+    <form className='create' onSubmit={handleSubmit}>
       <h3>Add a New Job :</h3>
       <label>Job Title:</label>
       <input
@@ -69,6 +78,7 @@ const JobForm = () => {
         onChange={(e) => setLocation(e.target.value)}
         value={location}
         className={emptyFields.includes('location') ? 'error' : ''}
+        s
       />
       <button>Add Job</button>
       {error && <div className='error'>{error}</div>}

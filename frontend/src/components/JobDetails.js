@@ -1,11 +1,21 @@
 import { useJobsContext } from '../hooks/useJobsContext';
+import formatDistanceFromNow from 'date-fns/formatDistanceToNow';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const JobDetails = ({ job }) => {
   const { dispatch } = useJobsContext();
+  const { user } = useAuthContext();
 
   const handleClick = async () => {
+    if (!user) {
+      return;
+    }
     const response = await fetch('/api/jobs/' + job._id, {
       method: 'DELETE',
+      headers: {
+        //prettier-ignore
+        "Authorization": `Bearer ${user.token}`,
+      },
     });
     const json = await response.json();
 
@@ -20,8 +30,12 @@ const JobDetails = ({ job }) => {
       <p>Company: {job.company}</p>
       <p>Salary: {job.salary}</p>
       <p>Location: {job.location}</p>
-      <p>{job.createdAt}</p>
-      <span onClick={handleClick}>Delete</span>
+      <p>
+        {formatDistanceFromNow(new Date(job.createdAt), { addSuffix: true })}
+      </p>
+      <span className='material-symbols-outlined' onClick={handleClick}>
+        Delete
+      </span>
     </div>
   );
 };

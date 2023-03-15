@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 
 //get all jobs
 const getAllJobs = asyncHandler(async (req, res) => {
-  const jobs = await Job.find({}).sort({ createdAt: -1 });
+  const user_id = req.user_id;
+  const jobs = await Job.find({ user_id }).sort({ createdAt: -1 });
 
   if (!jobs) {
     res.status(404).json({ error: 'There are no jobs found' });
@@ -52,7 +53,8 @@ const createJob = asyncHandler(async (req, res) => {
       .json({ error: 'Please fill in all fields', emptyFields });
   }
 
-  const job = await Job.create({ title, company, salary, location });
+  const user_id = req.user._id;
+  const job = await Job.create({ title, company, salary, location, user_id });
 
   res.status(200).json(job);
 });
